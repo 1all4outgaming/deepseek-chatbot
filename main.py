@@ -18,44 +18,42 @@ body {
     margin: 0;
     background-color: #f4f4f4;
     color: #333;
-    overflow: hidden; /* Prevent scrollbars on the body */
+    overflow: hidden;
 }
 
 #chat-container {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-    height: 100%; /* No fixed height, allows the chat to expand */
-    word-wrap: break-word;  /* Ensure long lines of text break appropriately */
-    overflow: hidden;
+    height: calc(100vh - 150px); 
     display: flex;
-    flex-direction: column-reverse; /* Reverse the order to keep latest messages at the bottom */
+    flex-direction: column-reverse;
 }
 
 #input-container {
     padding: 10px 20px;
     background-color: #fff;
     border-top: 1px solid #ddd;
-    display: flex; /* Use flexbox for input and buttons */
+    display: flex;
 }
 
-#input-area { /* New ID for the input area */
-    flex-grow: 1; /* Input area takes up available space */
-    margin-right: 10px; /* Space between input and buttons */
+#input-area {
+    flex-grow: 1;
+    margin-right: 10px;
 }
 
 .message-wrap {
     margin-bottom: 10px;
     display: flex;
-    flex-direction: column; /* Messages stack vertically */
+    flex-direction: column;
 }
 
 .user-message, .bot-message {
-    max-width: 95%; /* Messages take almost full width */
+    max-width: 95%;
     word-wrap: break-word;
     padding: 10px 15px;
     border-radius: 15px;
-    margin-bottom: 5px; /* Space between message parts */
+    margin-bottom: 5px;
 }
 
 .user-message {
@@ -68,9 +66,6 @@ body {
     background-color: #007bff;
     color: #fff;
     align-self: flex-start;
-    white-space: pre-wrap; /* Preserve formatting and allow wrapping for large output */
-    overflow-wrap: break-word;
-    word-break: break-word; /* Allows breaking words in case of huge words */
 }
 
 #input-area .textbox {
@@ -109,13 +104,12 @@ body {
     margin: 5px;
 }
 
-#cancel-btn { /* Style for the cancel button */
-    background-color: #dc3545 !important; /* Red color */
+#cancel-btn {
+    background-color: #dc3545 !important;
     border-color: #dc3545 !important;
     color: white !important;
 }
 
-/* Hide scrollbar but keep functionality */
 ::-webkit-scrollbar {
     width: 0.5em;
 }
@@ -125,7 +119,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2); /* Slightly visible thumb */
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
 }
 
@@ -147,12 +141,12 @@ def chat_with_model(user_message, chat_history):
     data = {
         "model": "deepseek-r1:1.5b",  # Replace with your actual model name
         "prompt": user_message,
-        "stream": False  # Set to False for non-streaming, can set to True if your API supports streaming for large responses
+        "stream": False
     }
 
     def make_request():
         try:
-            response = requests.post(API_URL, json=data, timeout=None)  # Remove timeout
+            response = requests.post(API_URL, json=data, timeout=None)
             if response.status_code == 200:
                 response_data = response.json()
                 bot_response = response_data.get("response", "🤖 No response from model.")
@@ -162,7 +156,7 @@ def chat_with_model(user_message, chat_history):
             bot_response = f"❌ Request Failed: {str(e)}"
         return bot_response
 
-    bot_response = make_request()  # Execute the request
+    bot_response = make_request()
 
     return chat_history + [("You", user_message), ("Bot", bot_response)]
 
@@ -170,13 +164,12 @@ def cancel_request():
     global current_request_thread
     if current_request_thread and current_request_thread.is_alive():
         try:
-            current_request_thread.join(0.1)  # Give it a little time to stop.
-            if current_request_thread.is_alive():  # Check again
+            current_request_thread.join(0.1)
+            if current_request_thread.is_alive():
                 print("Request Cancellation Failed. API does not support it.")
         except Exception as e:
             print(f"Error during cancellation: {e}")
     return "Request cancelled (if possible)."
-
 
 with gr.Blocks(css=custom_css) as demo:
     with gr.Column(elem_id="chat-container"):
@@ -192,7 +185,7 @@ with gr.Blocks(css=custom_css) as demo:
         )
 
     with gr.Row(elem_id="input-container"):
-        with gr.Column(scale=8, elem_id="input-area"):  # Added ID for input area
+        with gr.Column(scale=8, elem_id="input-area"):
             user_input = gr.Textbox(
                 placeholder="Type your message...",
                 show_label=False,
@@ -203,7 +196,7 @@ with gr.Blocks(css=custom_css) as demo:
         with gr.Column(scale=2):
             send_btn = gr.Button("Send", variant="primary")
             clear_btn = gr.Button("Clear")
-            cancel_btn = gr.Button("Cancel", elem_id="cancel-btn")  # Cancel button
+            cancel_btn = gr.Button("Cancel", elem_id="cancel-btn")
 
     send_click = send_btn.click(
         fn=chat_with_model,
@@ -219,7 +212,7 @@ with gr.Blocks(css=custom_css) as demo:
 
     clear_btn.click(lambda: None, None, chatbot, queue=False)
 
-    cancel_btn.click(cancel_request, None, chatbot)  # Cancel function
+    cancel_btn.click(cancel_request, None, chatbot)
 
     gr.Markdown(f"### 🌐 Access your app at: **{generate_gradio_url()}**")
 
