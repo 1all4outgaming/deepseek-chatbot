@@ -25,8 +25,11 @@ body {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-    height: calc(100vh - 150px); /* Adjust height as needed */
+    height: 100%; /* No fixed height, allows the chat to expand */
     word-wrap: break-word;  /* Ensure long lines of text break appropriately */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse; /* Reverse the order to keep latest messages at the bottom */
 }
 
 #input-container {
