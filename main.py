@@ -1,7 +1,6 @@
 import gradio as gr
 import requests
 import socket
-import threading
 
 # API URL for the model
 API_URL = "http://localhost:11434/api/generate"  # Replace with your API URL
