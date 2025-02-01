@@ -48,8 +48,8 @@ def main():
 
         send_button.click(fn=handle_send, inputs=[message_input, chat_history], outputs=[chatbot, chat_history])
 
-    # Launch Gradio app
-    demo.launch(server_name="0.0.0.0", server_port=7860, share=False)  # Allow all devices to access
+    # Launch Gradio app with a public link
+    demo.launch(server_name="0.0.0.0", server_port=7860, share=True)  # share=True will provide the link
 
 if __name__ == "__main__":
     main()
