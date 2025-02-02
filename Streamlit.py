@@ -47,10 +47,10 @@ with open("style.css") as f:
 col1, col2, col3 = st.columns([1, 3, 1])
 
 with col2:  # Middle column for chat UI
-    st.title("AI Chatbot Interface")
+    st.title("all4out-Ai")
 
     # User input field with "Send" button
-    user_input = st.text_input("Enter your message:", key="user-input")
+    user_input = st.text_input("Enter your message:", key="user-input", help="Type your message here.")
     send_button = st.button("Send", key="send-button")  # Send button added
 
     if send_button and user_input:
@@ -62,4 +62,3 @@ with col2:  # Middle column for chat UI
 
         # Display bot response
         st.markdown('<div class="bot-message"> <strong>Bot:</strong> ' + bot_response + '</div>', unsafe_allow_html=True)
-
