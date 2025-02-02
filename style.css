@@ -1,0 +1,52 @@
+/* 📌 Chat container (Main box for messages) */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 User message styling */
+.user-message {
+    background-color: #e5e5e5;  /* Light gray */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* 📌 Bot message styling */
+.bot-message {
+    background-color: #dfe7fd;  /* Light blue */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* 📌 Input box styling */
+.input-box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 📌 Send button styling */
+.send-button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background-color: #45a049; /* Darker green */
+}
