@@ -11,27 +11,36 @@
 
 /* 📌 User message styling */
 .user-message {
-    background-color: #e5e5e5;  /* Light gray */
+    background-color: #1b1818;  /* Light gray */
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 14px;
     margin: 10px 0;
     font-size: 16px;
+    transition: all 1s;
+}
+.user-message:hover{
+    background-color:#272323;
+    border-radius: 5px;
+
 }
 
 /* 📌 Bot message styling */
 .bot-message {
-    background-color: #dfe7fd;  /* Light blue */
+    background-color: #1b1818;  /* Light blue */
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 14px;
     margin: 10px 0;
     font-size: 16px;
+}
+.bot-message:hover{
+    background-color:#272323;
 }
 
 /* 📌 Input box styling */
 .input-box {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 5px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
 }
