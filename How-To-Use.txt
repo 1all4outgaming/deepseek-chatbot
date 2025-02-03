@@ -1,0 +1,21 @@
+How to Run ollama and how to install module 
+===========================================
+ollama command :
+
+curl -fsSL https://ollama.com/install.sh | sh
+ollama run deepseek-r1:1.5b
+===========================
+How to Create a good Interface to Chat With Ai module
+=====================================================
+Streamlit command :
+
+pip install streamlit
+streamlit run streamlit.py
+==========================
+How to Host Your Stream Website Around The World 
+================================================
+SSH command :
+
+ssh-keygen -t rsa -b 2048
+ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -R 80:localhost:8501 localhost.run
+===================================================================================
